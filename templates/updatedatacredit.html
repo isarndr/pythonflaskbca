@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Search and Update Data</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body class="purple-theme">
+
+    
+
+        <h2>Search and Update Data</h2>
+
+
+
+        <div class="form-container">
+
+            <form action="/updatedata" method="post">
+
+                <label for="customer_id">Customer ID:</label>
+
+                <input type="text" id="customer_id" name="customer_id" placeholder="Masukkan customer ID">
+
+                <input type="submit" value="Search" class="update-button" >
+
+            </form>
+
+            <a href="/" class="home-button yellow-button">Kembali ke Home</a>
+
+        </div>
+
+        {% if data_list %}
+
+        <h3>Data Found:</h3>
+        
+        <table>
+                <tr>
+                    <th>Card ID</th>
+                    <th>Customer ID</th>
+                    <th>Limit</th>
+                    <th>Balance</th>
+                    <th>Interest Rate</th>
+                    <th>Action</th>
+                </tr>
+            
+                {% for data in data_list %}
+                <tr>
+                    <td>{{ data.card_id }}</td>
+                    <td>{{ data.customer_id }}</td>
+                    <td>{{ data.limit }}</td>
+                    <td>{{ data.balance }}</td>
+                    <td>{{ data.interest_rate }}</td>
+                    <td>
+                        <button onclick="showUpdateForm('{{data.card_id}}', '{{data.customer_id}}', '{{data.limit}}',
+                        '{{data.balance}}', '{{data.interest_rate}}')"
+                        class="update-button">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div id="updateForm" style="display:none;">
+            <h3>Update Data:</h3>
+            <form action="/update_credit" method="post">
+                <input type="hidden" id="updateCardId" name="card_id">
+                <label class="field-label" for="updateCustomerId">Customer ID:</label>
+                <input type="text" id="updateCustomerId" name="customer_id">
+                <label class="field-label" for="updateLimit">Limit:</label>
+                <input type="text" id="updateLimit" name="limit">
+                <label class="field-label" for="updateBalance">Balance:</label>
+                <input type="text" id="updateBalance" name="balance">
+                <label class="field-label" for="updateInterestRate">Interest Rate:</label>
+                <input type="text" id="updateInterestRate" name="interest_rate">
+                <input type="submit" value="Submit" class="update-button">
+        <script>
+            function showUpdateForm(card_id, customer_id, limit, balance, interest_rate){
+
+                document.getElementById('updateCardId').value=card_id;
+                document.getElementById('updateCustomerId').value=customer_id;
+                document.getElementById('updateLimit').value=limit;
+                document.getElementById('updateBalance').value=balance;
+                document.getElementById('updateInterestRate').value=interest_rate;
+                document.getElementById('updateForm').style.display='block';      
+            }
+        </script>
+
+    {% else %}
+    <p>Tidak ada data yang ditemukan untuk customer ID yang diberikan. </p>
+    {% endif %}
+    </body>
+
+</html>

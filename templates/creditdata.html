@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Search Data</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body class="purple-theme">
+
+    
+
+        <h2>Search Data</h2>
+
+
+
+        <div class="form-container">
+
+            <form action="/getcredit" method="post">
+
+                <label for="card_id">Card ID:</label>
+
+                <input type="text" id="card_id" name="card_id" placeholder="Masukkan card ID">
+
+                <input type="submit" value="Search" class="update-button" >
+
+            </form>
+
+            <a href="/" class="home-button yellow-button">Kembali ke Home</a>
+
+        </div>
+    </body>
+ </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Penghapusan Data Transaksi</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    </head>
+
+    <body class="red-theme">
+        <h2>Penghapusan Data Transasaksi</h2>
+        <div class="form-container">
+            <form  action="/delete_transaksi" method="post">
+                <label class="field-label" for="transaction_id">Transaction ID:</label>
+                <input type="text" id="transaction_id" name="transaction_id" placeholder="Transaction ID">
+                <br>
+                <input type="submit" value="Search" class="delete-button">
+            </form>
+            <a href="/" class="home-button yellow-button">Kembali ke Home</a>
+        </div>
+
+        {% if data_list %}
+        <h1> Data found</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Card ID</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Merchant</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data_list %}
+                <tr>
+                    <td>{{item.transaction_id}}</td>
+                    <td>{{item.card_id}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.merchant}}</td>
+                    <td>
+                        <button onclick="confirmDelete('{{ item.transaction_id }}','{{item.card_id}}')"
+                            class="delete-button">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script>
+            function confirmDelete(transaction_id, card_id){
+                const isConfirmed = confirm(`Apakah Anda yakin ingin menghapus data dengan transaction_id: ${transaction_id}?`);
+                if(isConfirmed){
+                    fetch(`/transaksi/${transaction_id}`,{
+                        method: 'DELETE',
+                    })
+                    .then(response => response.json())
+                    .then(data =>{
+                        if(data.message.includes("berhasil dihapus")){
+                            alert("Data Berhasil dihapus!");
+                            location.reload();
+                        }else{
+                            alert("Terjadi kesalahan saat menghapus data. Silahkan coba lagi.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error: ", error);
+                        alert("Terjadi kesalahan saat menghapus data. Silahkan coba lagi.");
+                    })
+                }
+            }
+        </script>
+        {% else %}
+        <p> Tidak ada data yang ditemukan untuk transaction ID yang diberikan</p>
+        {% endif %}
+    </body>
+</html>

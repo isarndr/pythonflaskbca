@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: Update Satu Data Transaksi
+  version: 1.0.0
+tags:
+  - name: Daftar API
+parameters:
+  - name: card_id
+    in: path
+    description: Card ID yang akan diperbarui
+    required: true
+    type: integer
+  - in: body
+    name: body
+    description: Data Transaction yang akan diperbarui
+    required: true
+    schema:
+      $ref: '#/definitions/Transaction'
+definitions:
+  Transaction:
+    type: object
+    properties:
+      card_id:
+        type: integer
+      amount:
+        type: float
+      date:
+        type: date
+      merchant:
+        type: string
+    required:
+      - card_id
+      - amount
+      - date
+      - merchant
+responses:
+  200:
+    description: Data berhasil diperbarui
+    schema:
+        $ref: '#/definitions/Transaction'
+  404:
+    description: Data tidak ditemukan

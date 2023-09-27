@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Search and Update Data</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body class="purple-theme">
+
+    
+
+        <h2>Search and Update Data</h2>
+
+
+
+        <div class="form-container">
+
+            <form action="/updatedata_transaksi" method="post">
+
+                <label for="card_id">Card ID:</label>
+
+                <input type="text" id="card_id" name="card_id" placeholder="Masukkan card ID">
+
+                <input type="submit" value="Search" class="update-button" >
+
+            </form>
+
+            <a href="/" class="home-button yellow-button">Kembali ke Home</a>
+
+        </div>
+
+        {% if data_list %}
+
+        <h3>Data Found:</h3>
+        
+        <table>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Card ID</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Merchant</th>
+                    <th>Action</th>
+                </tr>
+            
+                {% for data in data_list %}
+                <tr>
+                    <td>{{ data.transaction_id }}</td>
+                    <td>{{ data.card_id }}</td>
+                    <td>{{ data.amount }}</td>
+                    <td>{{ data.date }}</td>
+                    <td>{{ data.merchant }}</td>
+                    <td>
+                        <button onclick="showUpdateForm('{{data.transaction_id}}', '{{data.card_id}}', '{{data.amount}}',
+                        '{{data.date}}', '{{data.merchant}}')"
+                        class="update-button">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div id="updateForm" style="display:none;">
+            <h3>Update Data:</h3>
+            <form action="/update_transaksi" method="post">
+                <input type="hidden" id="updateTransactionId" name="transaction_id">
+                <label class="field-label" for="updateCardId">Card ID:</label>
+                <input type="text" id="updateCardId" name="card_id">
+                <label class="field-label" for="updateAmount">Amount:</label>
+                <input type="text" id="updateAmount" name="amount">
+                <label class="field-label" for="updateDate">Date:</label>
+                <input type="date" id="updateDate" name="date">
+                <label class="field-label" for="updateMerchant">Merchant:</label>
+                <input type="text" id="updateMerchant" name="merchant">
+                <input type="submit" value="Submit" class="update-button">
+        <script>
+            function showUpdateForm(transaction_id, card_id, amount, date, merchant){
+
+                document.getElementById('updateTransactionId').value=transaction_id;
+                document.getElementById('updateCardId').value=card_id;
+                document.getElementById('updateAmount').value=amount;
+                document.getElementById('updateDate').value=date;
+                document.getElementById('updateMerchant').value=merchant;
+                document.getElementById('updateForm').style.display='block';      
+            }
+        </script>
+
+    {% else %}
+    <p>Tidak ada data yang ditemukan untuk transaction ID yang diberikan. </p>
+    {% endif %}
+    </body>
+
+</html>

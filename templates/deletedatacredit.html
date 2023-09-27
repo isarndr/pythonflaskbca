@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Penghapusan Data Credit Card</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    </head>
+
+    <body class="red-theme">
+        <h2>Penghapusan Data Credit Card</h2>
+        <div class="form-container">
+            <form  action="/delete_credit_card" method="post">
+                <label class="field-label" for="customer_id">Customer ID:</label>
+                <input type="text" id="customer_id" name="customer_id" placeholder="Customer ID">
+                <br>
+                <input type="submit" value="Search" class="delete-button">
+            </form>
+            <a href="/" class="home-button yellow-button">Kembali ke Home</a>
+        </div>
+
+        {% if data_list %}
+        <h1> Data found</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Card ID</th>
+                    <th>Customer ID</th>
+                    <th>Limit</th>
+                    <th>Balance</th>
+                    <th>Interest Rate</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data_list %}
+                <tr>
+                    <td>{{item.card_id}}</td>
+                    <td>{{item.customer_id}}</td>
+                    <td>{{item.limit}}</td>
+                    <td>{{item.balance}}</td>
+                    <td>{{item.interest_rate}}</td>
+                    <td>
+                        <button onclick="confirmDelete('{{ item.card_id }}','{{item.customer_id}}')"
+                            class="delete-button">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script>
+            function confirmDelete(card_id, customer_id){
+                const isConfirmed = confirm(`Apakah Anda yakin ingin menghapus data dengan customer_id: ${customer_id}?`);
+                if(isConfirmed){
+                    fetch(`/creditcard/${card_id}`,{
+                        method: 'DELETE',
+                    })
+                    .then(response => response.json())
+                    .then(data =>{
+                        if(data.message.includes("berhasil dihapus")){
+                            alert("Data Berhasil dihapus!");
+                            location.reload();
+                        }else{
+                            alert("Terjadi kesalahan saat menghapus data. Silahkan coba lagi.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error: ", error);
+                        alert("Terjadi kesalahan saat menghapus data. Silahkan coba lagi.");
+                    })
+                }
+            }
+        </script>
+        {% else %}
+        <p> Tidak ada data yang ditemukan untuk customer ID yang diberikan</p>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,16 @@
+openapi: 3.0.0
+info:
+  title: Delete Satu Data Transaksi
+tags:
+  - name: Daftar API
+parameters:
+  - name: transaction_id
+    in: path
+    description: Transaction ID yang akan dihapus
+    required: true
+    type: integer
+responses:
+  200:
+    description: Data transaksi berhasil dihapus
+  404:
+    description: Data tidak ditemukan

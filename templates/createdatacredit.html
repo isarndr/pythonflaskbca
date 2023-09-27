@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Input Data Credit Card</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body class="blue-theme">
+        <h2>Input Data Credit Card</h2>
+        <div class="form-container">
+
+            {% if error %}
+                <p style="color: red;">{{ error }} </p>
+            {% endif %}
+            
+            <form action="/input" method="post">
+                <label for="customer_id">Customer ID:</label>
+                <input type="text" name="customer_id" id="customer_id" placeholder="Masukkan custome ID" required>
+                <br>
+                <label for="limit">Limit:</label>
+                <input type="text" name="limit" id="limit" placeholder="Masukkan limit" required>
+                <br>
+                <label for="balance">Balance:</label>
+                <input type="text" name="balance" id="balance" placeholder="Masukkan balance" required>
+                <br>
+                <label for="interest_rate">Interest Rate:</label>
+                <input type="text" name="interest_rate" id="interest_rate" placeholder="Masukkan interest rate" required>
+                <br>
+                <input type="submit" value="Tambahkan">
+            </form>
+            <a href="/" class="home-button yellow-button">Kembali ke Home</a>
+        </div>
+    </body>
+</html>

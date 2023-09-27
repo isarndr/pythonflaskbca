@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Ambil Semua Data Transaksi
+  version: 1.0.0
+tags:
+  - name: Daftar API
+definitions:
+  Transaction:
+    type: object
+    properties:
+      card_id:
+        type: integer
+        description: Card ID
+      amount:
+        type: float
+        description: Amount
+      date:
+        type: date
+        description: Transaction date
+      merchant:
+        type: string
+        description: Merchant
+responses:
+  200:
+    description: Daftar semua transaksi
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Transaction'

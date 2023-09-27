@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Get Credit Card</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            body {
+                background-color: #ffd323;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="/" class="home-button-display">Kembali ke Home</a>
+        <h1>Data Credit Card</h1>
+        <table>
+            <thread>
+                <tr>
+                    <th>Card ID</th>
+                    <th>Customer ID</th>
+                    <th>Limit</th>
+                    <th>Balance</th>
+                    <th>Interest Rate</th>
+                </tr>
+            </thread>
+            <tbody>
+                <tr>
+                    <td>{{ credit_card.card_id }}</td>
+                    <td>{{ credit_card.customer_id }}</td>
+                    <td>{{ credit_card.limit }}</td>
+                    <td>{{ credit_card.balance }}</td>
+                    <td>{{ credit_card.interest_rate }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Input Data Transaksi</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body class="blue-theme">
+        <h2>Input Data Transaksi</h2>
+        <div class="form-container">
+
+            {% if error %}
+                <p style="color: red;">{{ error }} </p>
+            {% endif %}
+            
+            <form action="/input_transaksi" method="post">
+                <label for="card_id">Card ID:</label>
+                <input type="text" name="card_id" id="card_id" placeholder="Masukkan card ID" required>
+                <br>
+                <label for="amount">Amount:</label>
+                <input type="text" name="amount" id="amount" placeholder="Masukkan amount" required>
+                <br>
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date" placeholder="Masukkan date" required>
+                <br>
+                <label for="merchant">Merchant:</label>
+                <input type="text" name="merchant" id="merchant" placeholder="Masukkan merchant" required>
+                <br>
+                <input type="submit" value="Tambahkan">
+            </form>
+            <a href="/" class="home-button yellow-button">Kembali ke Home</a>
+        </div>
+    </body>
+</html>

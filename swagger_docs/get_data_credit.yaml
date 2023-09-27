@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Ambil Data Credit Card
+  version: 1.0.0
+tags:
+  - name: Daftar API
+definitions:
+  CreditCard:
+    type: object
+    properties:
+      customer_id:
+        type: string
+        description: ID Customer
+      limit:
+        type: integer
+        description: Limit kredit
+      balance:
+        type: string
+        description: Balance kredit
+      interest_rate:
+        type: string
+        description: Interest rate kredit
+responses:
+  200:
+    description: Getr credit card
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/CreditCard'

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Aplikasi Pengelolaan Data Kartu Kredit</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body class="blue-theme">
+    
+        <h2>Selamat Datang di Aplikasi Pengelolaan Data Kartu Kredit</h2>
+
+        <div class="menu">
+            <a href="/input" class="menu-button">Input Data Credit Card</a>
+            <a href="/display_all" class="menu-button">Show All Credit Card</a>
+            <a href="/credit" class="menu-button">Credit Card Detail</a>
+            <a href="/updatedata" class="menu-button">Update Data Credit Card</a>
+            <a href="/delete_credit_card" class="menu-button">Delete Data Credit Card</a>
+        </div>
+        <div class="menu">
+            <a href="/input_transaksi" class="menu-button">Input Data Transaksi</a>
+            <a href="/display_all_transaksi" class="menu-button">Show All Transaksi</a>
+            <a href="/updatedata_transaksi" class="menu-button">Update Data Transaksi</a>
+            <a href="/delete_transaksi" class="menu-button">Delete Data Transaksi</a>
+        </div>
+    </body>
+</html>

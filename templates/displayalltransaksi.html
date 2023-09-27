@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Get All Transaksi</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            body {
+                background-color: #ffd323;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="/" class="home-button-display">Kembali ke Home</a>
+        <h1>Semua Data Transaksi</h1>
+        <table>
+            <thread>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Card ID</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Merchant</th>
+                </tr>
+            </thread>
+            <tbody>
+                {% for transaction in transaction_list %}
+                <tr>
+                    <td>{{ transaction.transaction_id }}</td>
+                    <td>{{ transaction.card_id }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.date }}</td>
+                    <td>{{ transaction.merchant }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  title: Ambil Satu Data Credit Card
+  version: 1.0.0
+tags:
+  - name: Daftar API
+definitions:
+  CreditCard:
+    type: object
+    properties:
+      card_id:
+        type: integer
+        description: Card ID
+      customer_id:
+        type: string
+        description: Customer ID
+      limit:
+        type: float
+        description: Limit
+      balance:
+        type: float
+        description: Balance
+      interest_rate:
+        type: float
+        description: Interest rate
+
+parameters:
+  - name: id_karyawan
+    in: path
+    description: ID Karyawan yang akan diambil
+    required: true
+    type: integer
+responses:
+  200:
+    description: Data karyawan berdasarkan ID
+    schema:
+      items:
+        $ref: '#/definitions/CreditCard'
+  404:
+    description: Data tidak ditemukan

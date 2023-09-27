@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: Update Satu Data Credit Card
+  version: 1.0.0
+tags:
+  - name: Daftar API
+parameters:
+  - name: card_id
+    in: path
+    description: Card ID yang akan diperbarui
+    required: true
+    type: integer
+  - in: body
+    name: body
+    description: Data Credit Card yang akan diperbarui
+    required: true
+    schema:
+      $ref: '#/definitions/CreditCard'
+definitions:
+  CreditCard:
+    type: object
+    properties:
+      customer_id:
+        type: string
+      limit:
+        type: float
+      balance:
+        type: float
+      interest_rate:
+        type: float
+    required:
+      - customer_id
+      - limit
+      - balance
+      - interest_rate
+responses:
+  200:
+    description: Data berhasil diperbarui
+    schema:
+        $ref: '#/definitions/CreditCard'
+  404:
+    description: Data tidak ditemukan
