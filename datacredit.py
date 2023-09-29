@@ -4,6 +4,9 @@ from flask import redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flasgger import Swagger, swag_from
 from datetime import datetime
+from sqlalchemy.sql import func
+
+
 
 import os
 
@@ -130,7 +133,6 @@ def get_all_credit_card():
 
 
 @app.route('/display', methods=['GET'])
-@swag_from('swagger_docs/get_data_credit.yaml')
 def get_credit_card(card_id):
     try:
         credit = CreditCard.query.get(card_id)
@@ -207,14 +209,14 @@ def update_credit():
     except Exception as e:
         return jsonify({'message': f'Terjadi kesalahan: {str(e)}'}),500
 
-@app.route('/creditcard/<int:card_id>', methods=['GET'])
-@swag_from('swagger_docs/get_one_credit.yaml')
-def get_one_credit(card_id):
-    if request.method == 'GET':
-        card_id = request.form.get('card_id')
-        credit = CreditCard.query.get(card_id)
-        return render_template('displaycredit.html', credit)
-    return render_template('displaycredit.html')
+# @app.route('/creditcard/<int:card_id>', methods=['GET'])
+# @swag_from('swagger_docs/get_one_credit.yaml')
+# def get_one_credit(card_id):
+#     if request.method == 'GET':
+#         card_id = request.form.get('card_id')
+#         credit = CreditCard.query.get(card_id)
+#         return render_template('displaycredit.html', credit)
+#     return render_template('displaycredit.html')
 
 @app.route('/input_transaksi', methods=['GET','POST'])
 def input_data_transaksi():
@@ -258,7 +260,7 @@ def input_data_transaksi():
 
 # Koneksi API Create
 @app.route('/transaction', methods=['POST'])
-@swag_from('swagger_docs/create_data_transaksi.yaml')
+# @swag_from('swagger_docs/create_data_transaksi.yaml')
 def create_transaksi():
     data = request.json
     
@@ -281,6 +283,8 @@ def create_transaksi():
     db.session.commit()
     
     return jsonify({'message':'Data transaksi berhasil ditambahkan'}),201
+
+
 
 @app.route('/display_all_transaksi', methods=['GET'])
 @swag_from('swagger_docs/get_all_data_transaksi.yaml')
@@ -371,25 +375,105 @@ def delete_transaksi_ui():
     finally:
         return render_template('deletedatatransaksi.html',data_list=data_list)    
   
-@app.route('/getcredit')
-def retrieve_single_credit():
-    credit = CreditCard.query.get(request.form.get('card_id'))
-    if credit:
-        return render_template('creditdata.html', credit = credit)
-    return f"Credit Card with id ={request.form.get('card_id')} Doenst exist"
+@app.route('/creditcard', methods=['GET', 'POST'])
+# @swag_from('swagger_docs/get_data_credit.yaml')
+def get_one_credit():
+    data_list=[]
+    if request.method == 'POST':
+        card_id = request.form.get('card_id')
+        creditcard = CreditCard.query.get(card_id)
+        data_list.append(creditcard)
+        return render_template('creditdata.html',data_list=data_list)
+    return render_template('creditdata.html')
 
-@app.route('/get_credit_card',methods=['GET','POST'])
-def get_credit_card_ui():
+
+@app.route('/creditcard/<int:card_id>', methods=['POST'])
+@swag_from('swagger_docs/get_data_credit.yaml')
+def get_one_credit_swag(card_id):
+        data_list=[]
+
+        creditcard = CreditCard.query.get(card_id)
+        data_list.append(creditcard)
+
+        return render_template('creditdata.html',data_list=data_list)
+    
+
+@app.route('/update_credit/<int:card_id>', methods=['POST'])
+@swag_from('swagger_docs/update_data_credit.yaml')
+def update_credit2(card_id):
+    data = request.json
+    
+    new_credit = CreditCard(
+        customer_id=data['customer_id'],
+        limit=data['limit'],
+        balance=data['balance'],
+        interest_rate=data['interest_rate']
+    )   
+    
     try:
-        if request.method == 'POST':
-            search_customer_id = request.form['customer_id']
-            all_credit_card=CreditCard.query.all()
-            data_list=[credit_card for credit_card in all_credit_card if search_customer_id in credit_card.customer_id]
+        customer_id = new_credit.customer_id
+        limit = new_credit.limit
+        balance = new_credit.balance
+        interest_rate = new_credit.interest_rate
+        # print("test ",card_id)
+        credit = CreditCard.query.get(card_id)
+        
+        if not credit:
+            return jsonify({'message': 'Credit card tidak ditemukan'}), 404
+        
+        credit.customer_id = customer_id
+        credit.limit = limit
+        credit.balance = balance
+        credit.interest_rate = interest_rate
+        
+        db.session.commit()
+        
+        return redirect(url_for('get_all_credit_card'))
+
     except Exception as e:
-        error_message = f"Terjadi kesalahan: {e}"
-        print(error_message)
-        return render_template('error.html', pesan=error_message), 500
-    finally:
-        return render_template('deletedatacredit.html',data_list=data_list)
+        return jsonify({'message': f'Terjadi kesalahan: {str(e)}'}),500
+
+@app.route('/input_transaksi2', methods=['POST'])
+@swag_from('swagger_docs/create_data_transaksiswagger.yaml')
+def input_data_transaksi2():
+        data = request.json
+
+        print("test",data)
+        card_id = data['card_id']
+        amount=data['amount']
+        date=datetime.strptime(str(data['date']), '%Y-%m-%d')
+        merchant=data['merchant']
+        
+        credit = CreditCard.query.get(card_id)
+                
+        if not credit:
+            return render_template('createdatatransaksiswagger.html', error="Card ID tidak exist")        
+        # print("date ", date, type(date))
+        if credit.balance < float(amount):
+            return render_template('createdatatransaksiswagger.html', error=f"Your balance is {credit.balance}")
+        
+        if credit.limit < float(amount):
+            return render_template('createdatatransaksiswagger.html', error=f"Your limit is {credit.limit}")   
+
+        if not card_id or not amount or not date or not merchant:
+            return render_template('createdatatransaksiswagger.html', error="Semua field wajib diisi")
+
+        credit.balance = credit.balance - float(amount) - ((float(amount)* credit.interest_rate/100))
+        
+        if credit.balance<0:
+            return render_template('createdatatransaksiswagger.html', error="Saldo tidak cukup")
+                
+        new_transaction = Transaction(
+            card_id=card_id,
+            amount=amount,
+            date=date,
+            merchant=merchant
+        )
+        
+        db.session.add(new_transaction)
+        db.session.commit()
+        
+        return render_template('confirmation.html')
+    
 if __name__ == '__main__':
     app.run(debug=True, port=5030)

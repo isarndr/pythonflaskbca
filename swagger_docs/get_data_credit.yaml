@@ -4,6 +4,12 @@ info:
   version: 1.0.0
 tags:
   - name: Daftar API
+parameters:
+  - name: card_id
+    in: path
+    description: Card ID yang akan diambil
+    required: true
+    type: integer
 definitions:
   CreditCard:
     type: object

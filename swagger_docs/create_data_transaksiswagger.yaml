@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title:
+  version: 1.0.0
+tags:
+  - name: Daftar API
+parameters:
+  - in: body
+    name: body
+    description: Data transaksi yang akan ditambahkan
+    required: true
+    schema: 
+      $ref: '#/definitions/Transaction'
+responses:
+  201:
+    description: Data transaksi berhasil ditambahkan
+    schema:
+      $ref: '#/definitions/Transaction'
+definitions:
+  Transaction:
+    type: object
+    properties:
+      card_id:
+        type: int
+      amount:
+        type: float
+      date:
+        type: string
+      merchant:
+        type: string
+    required:
+      - card_id
+      - amount
+      - date
+      - merchant

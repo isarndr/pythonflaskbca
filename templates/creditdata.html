@@ -8,7 +8,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Search Data</title>
+        <title>Search and Update Data</title>
 
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -18,13 +18,13 @@
 
     
 
-        <h2>Search Data</h2>
+        <h2>Search and Update Data</h2>
 
 
 
         <div class="form-container">
 
-            <form action="/getcredit" method="post">
+            <form action="/creditcard" method="post">
 
                 <label for="card_id">Card ID:</label>
 
@@ -37,5 +37,36 @@
             <a href="/" class="home-button yellow-button">Kembali ke Home</a>
 
         </div>
+
+        {% if data_list %}
+
+        <h3>Data Found:</h3>
+        
+        <table>
+                <tr>
+                    <th>Card ID</th>
+                    <th>Customer ID</th>
+                    <th>Limit</th>
+                    <th>Balance</th>
+                    <th>Interest Rate</th>
+                </tr>
+                {% for data in data_list %}
+                <tr>
+                    <td>{{ data.card_id }}</td>
+                    <td>{{ data.customer_id }}</td>
+                    <td>{{ data.limit }}</td>
+                    <td>{{ data.balance }}</td>
+                    <td>{{ data.interest_rate }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    
+
+    {% else %}
+    <p>Tidak ada data yang ditemukan untuk customer ID yang diberikan. </p>
+    {% endif %}
     </body>
- </html>
+
+</html>

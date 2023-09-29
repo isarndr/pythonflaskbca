@@ -1,0 +1,10 @@
+.C:\Users\isara\OneDrive\Documents\Training Python Sep 2023\mypy\Project Isa Randra - Aplikasi Pengelolaan Data Kartu Kredit\test_master.py:58: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  self.assertIsNone(CreditCard.query.get(karyawan.card_id))  # Memastikan karyawan dengan id tersebut sudah dihapus
+.Terjadi kesalahan: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+.C:\Users\isara\OneDrive\Documents\Training Python Sep 2023\mypy\Project Isa Randra - Aplikasi Pengelolaan Data Kartu Kredit\test_master.py:110: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  self.assertIsNone(Transaction.query.get(karyawan2.transaction_id))  # Memastikan karyawan dengan id tersebut sudah dihapus
+....
+----------------------------------------------------------------------
+Ran 7 tests in 0.256s
+
+OK

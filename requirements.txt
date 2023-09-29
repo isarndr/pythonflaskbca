@@ -44,3 +44,4 @@ Werkzeug==2.2.3
 gunicorn
 psycopg2
 mysql-connector-python
+Flask-Testing==0.8.1
