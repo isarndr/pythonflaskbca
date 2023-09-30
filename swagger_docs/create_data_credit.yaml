@@ -22,7 +22,7 @@ definitions:
     properties:
       customer_id:
         type: string
-      limit:
+      limitt:
         type: float
       balance:
         type: float
@@ -30,6 +30,6 @@ definitions:
         type: float
     required:
       - customer_id
-      - limit
+      - limitt
       - balance
       - interest_rate
