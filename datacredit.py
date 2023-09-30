@@ -76,7 +76,7 @@ def input_data():
             return render_template('createdatacredit.html', error="Semua field wajib diisi")
 
         new_credit = CreditCard(
-            card_id=int(random.random()),
+            card_id=int(random.random()*10**(random.random()*10)),
             customer_id=customer_id,
             limitt=limitt,
             balance=balance,
@@ -246,7 +246,7 @@ def input_data_transaksi():
             return render_template('createdatatransaksi.html', error="Saldo tidak cukup")
                 
         new_transaction = Transaction(
-            transaction_id=int(random.random()),
+            transaction_id=int(random.random()*10**(random.random()*10)),
             card_id=card_id,
             amount=amount,
             date=date,
