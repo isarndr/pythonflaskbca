@@ -246,6 +246,7 @@ def input_data_transaksi():
             return render_template('createdatatransaksi.html', error="Saldo tidak cukup")
                 
         new_transaction = Transaction(
+            transaction_id=int(random.random()),
             card_id=card_id,
             amount=amount,
             date=date,
