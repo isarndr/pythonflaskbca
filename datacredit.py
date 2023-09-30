@@ -17,7 +17,8 @@ app = Flask(__name__)
 DATABASE_PATH = 'C:/Users/isara/OneDrive/Documents/Training Python Sep 2023/mypy/Project Isa Randra - Aplikasi Pengelolaan Data Kartu Kredit/credit.db'
 
 # Konfigurasi database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_PATH
+app.config['SQLALCHEMY_ECH0'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysq+mysqlconnectorl://root:zAruUyl0mE232WV4xC3M@containers-us-west-159.railway.app:7138/railway'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Konfigurasi Swagger
