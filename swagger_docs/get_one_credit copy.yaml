@@ -14,9 +14,9 @@ definitions:
       customer_id:
         type: string
         description: Customer ID
-      limit:
+      limitt:
         type: float
-        description: Limit
+        description: limitt
       balance:
         type: float
         description: Balance
