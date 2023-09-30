@@ -9,7 +9,7 @@ metadata = MetaData()
 credit_card = Table('credit_card', metadata,
                  Column('card_id', Integer, primary_key=True),
                  Column('customer_id', String),
-                 Column('limit', Float),
+                 Column('limitt', Float),
                  Column('balance', Float),
                  Column('interest_rate', Float),
                  )
