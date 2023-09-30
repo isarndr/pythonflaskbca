@@ -56,11 +56,11 @@
                 <tr>
                     <td>{{ data.card_id }}</td>
                     <td>{{ data.customer_id }}</td>
-                    <td>{{ data.limit }}</td>
+                    <td>{{ data.limitt }}</td>
                     <td>{{ data.balance }}</td>
                     <td>{{ data.interest_rate }}</td>
                     <td>
-                        <button onclick="showUpdateForm('{{data.card_id}}', '{{data.customer_id}}', '{{data.limit}}',
+                        <button onclick="showUpdateForm('{{data.card_id}}', '{{data.customer_id}}', '{{data.limitt}}',
                         '{{data.balance}}', '{{data.interest_rate}}')"
                         class="update-button">Update</button>
                     </td>
@@ -75,18 +75,18 @@
                 <label class="field-label" for="updateCustomerId">Customer ID:</label>
                 <input type="text" id="updateCustomerId" name="customer_id">
                 <label class="field-label" for="updateLimit">Limit:</label>
-                <input type="text" id="updateLimit" name="limit">
+                <input type="text" id="updateLimit" name="limitt">
                 <label class="field-label" for="updateBalance">Balance:</label>
                 <input type="text" id="updateBalance" name="balance">
                 <label class="field-label" for="updateInterestRate">Interest Rate:</label>
                 <input type="text" id="updateInterestRate" name="interest_rate">
                 <input type="submit" value="Submit" class="update-button">
         <script>
-            function showUpdateForm(card_id, customer_id, limit, balance, interest_rate){
+            function showUpdateForm(card_id, customer_id, limitt, balance, interest_rate){
 
                 document.getElementById('updateCardId').value=card_id;
                 document.getElementById('updateCustomerId').value=customer_id;
-                document.getElementById('updateLimit').value=limit;
+                document.getElementById('updateLimit').value=limitt;
                 document.getElementById('updateBalance').value=balance;
                 document.getElementById('updateInterestRate').value=interest_rate;
                 document.getElementById('updateForm').style.display='block';      
