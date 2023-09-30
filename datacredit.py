@@ -58,9 +58,9 @@ class Transaction(db.Model):
     date = db.Column(db.Date,nullable=False)
     merchant = db.Column(db.String,nullable=False)
     
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
     
 @app.route('/')
 def index():
