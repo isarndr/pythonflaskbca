@@ -44,7 +44,7 @@ db = SQLAlchemy(app)
 class CreditCard(db.Model):
     card_id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.String,nullable=False)
-    limit = db.Column(db.Float,nullable=False)
+    limitt = db.Column(db.Float,nullable=False)
     balance = db.Column(db.Float,nullable=False)
     interest_rate = db.Column(db.Float,nullable=False)
 
@@ -67,16 +67,16 @@ def index():
 def input_data():
     if request.method == 'POST':
         customer_id = request.form.get('customer_id')
-        limit=request.form.get('limit')
+        limitt=request.form.get('limitt')
         balance=request.form.get('balance')
         interest_rate=request.form.get('interest_rate')
 
-        if not customer_id or not limit or not balance or not interest_rate:
+        if not customer_id or not limitt or not balance or not interest_rate:
             return render_template('createdatacredit.html', error="Semua field wajib diisi")
 
         new_credit = CreditCard(
             customer_id=customer_id,
-            limit=limit,
+            limitt=limitt,
             balance=balance,
             interest_rate=interest_rate
         )
@@ -95,7 +95,7 @@ def create_credit():
     
     new_credit = CreditCard(
         customer_id=data['customer_id'],
-        limit=data['limit'],
+        limitt=data['limitt'],
         balance=data['balance'],
         interest_rate=data['interest_rate']
     )   
@@ -116,7 +116,7 @@ def get_all_credit_card():
             credit_card_data = {
                 'card_id': credit_card.card_id,
                 'customer_id': credit_card.customer_id,
-                'limit': credit_card.limit,
+                'limitt': credit_card.limitt,
                 'balance': credit_card.balance,
                 'interest_rate': credit_card.interest_rate
             }  
@@ -186,7 +186,7 @@ def update_credit():
     try:
         card_id = request.form.get('card_id')
         customer_id = request.form.get('customer_id')
-        limit = request.form.get('limit')
+        limitt = request.form.get('limitt')
         balance = request.form.get('balance')
         interest_rate = request.form.get('interest_rate')
         # print("test ",card_id)
@@ -196,7 +196,7 @@ def update_credit():
             return jsonify({'message': 'Credit card tidak ditemukan'}), 404
         
         credit.customer_id = customer_id
-        credit.limit = limit
+        credit.limitt = limitt
         credit.balance = balance
         credit.interest_rate = interest_rate
         
@@ -232,8 +232,8 @@ def input_data_transaksi():
         if credit.balance < float(amount):
             return render_template('createdatatransaksi.html', error=f"Your balance is {credit.balance}")
         
-        if credit.limit < float(amount):
-            return render_template('createdatatransaksi.html', error=f"Your limit is {credit.limit}")   
+        if credit.limitt < float(amount):
+            return render_template('createdatatransaksi.html', error=f"Your limitt is {credit.limitt}")   
 
         if not card_id or not amount or not date or not merchant:
             return render_template('createdatatransaksi.html', error="Semua field wajib diisi")
@@ -403,14 +403,14 @@ def update_credit2(card_id):
     
     new_credit = CreditCard(
         customer_id=data['customer_id'],
-        limit=data['limit'],
+        limitt=data['limitt'],
         balance=data['balance'],
         interest_rate=data['interest_rate']
     )   
     
     try:
         customer_id = new_credit.customer_id
-        limit = new_credit.limit
+        limitt = new_credit.limitt
         balance = new_credit.balance
         interest_rate = new_credit.interest_rate
         # print("test ",card_id)
@@ -420,7 +420,7 @@ def update_credit2(card_id):
             return jsonify({'message': 'Credit card tidak ditemukan'}), 404
         
         credit.customer_id = customer_id
-        credit.limit = limit
+        credit.limitt = limitt
         credit.balance = balance
         credit.interest_rate = interest_rate
         
@@ -450,8 +450,8 @@ def input_data_transaksi2():
         if credit.balance < float(amount):
             return render_template('createdatatransaksiswagger.html', error=f"Your balance is {credit.balance}")
         
-        if credit.limit < float(amount):
-            return render_template('createdatatransaksiswagger.html', error=f"Your limit is {credit.limit}")   
+        if credit.limitt < float(amount):
+            return render_template('createdatatransaksiswagger.html', error=f"Your limitt is {credit.limitt}")   
 
         if not card_id or not amount or not date or not merchant:
             return render_template('createdatatransaksiswagger.html', error="Semua field wajib diisi")
