@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flasgger import Swagger, swag_from
 from datetime import datetime
 from sqlalchemy.sql import func
+import random
 
 
 
@@ -75,6 +76,7 @@ def input_data():
             return render_template('createdatacredit.html', error="Semua field wajib diisi")
 
         new_credit = CreditCard(
+            card_id=int(random.random()),
             customer_id=customer_id,
             limitt=limitt,
             balance=balance,
