@@ -37,7 +37,7 @@ class MyTest(TestCase):
         # Melakukan request POST ke '/karyawan' dengan data karyawan baru
         response = self.client.post('/credit_card', json={
             'customer_id': '1',
-            'limit': '10',
+            'limitt': '10',
             'balance': '20',
             'interest_rate':'30'
         })
@@ -48,7 +48,7 @@ class MyTest(TestCase):
     # Test untuk menghapus karyawan
     def test_delete_credit(self):
         # Membuat objek karyawan baru dan menyimpannya ke database
-        karyawan = CreditCard(customer_id='1', limit='10000000', balance='100000000', interest_rate='8')
+        karyawan = CreditCard(customer_id='1', limitt='10000000', balance='100000000', interest_rate='8')
         db.session.add(karyawan)
         db.session.commit()
 
@@ -59,7 +59,7 @@ class MyTest(TestCase):
         
     def test_delete_credit_ui(self):
         # Membuat objek karyawan baru dan menyimpannya ke database 
-        karyawan5 = CreditCard(customer_id='3', limit='30000000', balance='300000000', interest_rate='4')
+        karyawan5 = CreditCard(customer_id='3', limitt='30000000', balance='300000000', interest_rate='4')
         db.session.add(karyawan5)        
         db.session.commit()
 
@@ -78,7 +78,7 @@ class MyTest(TestCase):
     # def test_create_karyawan2(self):
     #     # Melakukan request POST ke '/karyawan' dengan data karyawan baru
         
-    #     karyawan = CreditCard(customer_id='1', limit='10000000', balance='100000000', interest_rate='8')
+    #     karyawan = CreditCard(customer_id='1', limitt='10000000', balance='100000000', interest_rate='8')
     #     db.session.add(karyawan)
     #     db.session.commit()
                  
@@ -96,7 +96,7 @@ class MyTest(TestCase):
     # Test untuk menghapus karyawan
     def test_delete_transaksi(self):
         # Membuat objek karyawan baru dan menyimpannya ke database
-        karyawan = CreditCard(customer_id='1', limit='10000000', balance='100000000', interest_rate='8')
+        karyawan = CreditCard(customer_id='1', limitt='10000000', balance='100000000', interest_rate='8')
         db.session.add(karyawan)
         db.session.commit()
 
@@ -112,19 +112,19 @@ class MyTest(TestCase):
     # Test untuk mendapatkan semua karyawan
     def test_get_all_transaksi(self):
         # Membuat dua objek karyawan baru dan menyimpannya ke database
-        karyawan = CreditCard(customer_id='1', limit='10000000', balance='100000000', interest_rate='8')
+        karyawan = CreditCard(customer_id='1', limitt='10000000', balance='100000000', interest_rate='8')
         db.session.add(karyawan)
 
         karyawan2 = Transaction(card_id='1', amount='10000000', date=datetime.date.today(), merchant='8')
         db.session.add(karyawan2)
         
-        karyawan3 = CreditCard(customer_id='2', limit='20000000', balance='200000000', interest_rate='9')
+        karyawan3 = CreditCard(customer_id='2', limitt='20000000', balance='200000000', interest_rate='9')
         db.session.add(karyawan3)
 
         karyawan4 = Transaction(card_id='2', amount='20000000', date=datetime.date.today(), merchant='3')
         db.session.add(karyawan4)
         
-        karyawan5 = CreditCard(customer_id='3', limit='30000000', balance='300000000', interest_rate='4')
+        karyawan5 = CreditCard(customer_id='3', limitt='30000000', balance='300000000', interest_rate='4')
         db.session.add(karyawan5)
 
         karyawan6 = Transaction(card_id='3', amount='30000000', date=datetime.date.today(), merchant='3')
