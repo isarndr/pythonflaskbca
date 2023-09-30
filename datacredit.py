@@ -477,4 +477,4 @@ def input_data_transaksi2():
         return render_template('confirmation.html')
     
 if __name__ == '__main__':
-    app.run(debug=True, port=5030)
+    app.run(debug=True)
