@@ -11,9 +11,9 @@ definitions:
       customer_id:
         type: string
         description: ID Customer
-      limit:
+      limitt:
         type: integer
-        description: Limit kredit
+        description: limitt kredit
       balance:
         type: string
         description: Balance kredit
